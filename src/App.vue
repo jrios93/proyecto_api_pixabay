@@ -13,6 +13,7 @@ const {imageList,err,totalPages,isLoading,fetchData} = usePixabayImages()
 const page = ref(1)
 const searchPage = ref('')
 const searchInput = ref('')
+const errorPagination = ref(null)
 
 watch(searchInput, async(newSearchInput) => {
   console.log('AEAAA')
@@ -22,14 +23,6 @@ watch(searchInput, async(newSearchInput) => {
 })
 
 watch(page, async() => {
-  await fetchData(searchInput.value,page.value)
-})
-
-watch(searchPage, async (newSearchPage) => {
-  page.value = newSearchPage.replace(/\D/g, '')
-  if (page.value == '') {
-    page.value = 1
-  }
   await fetchData(searchInput.value,page.value)
 })
 
@@ -46,6 +39,20 @@ const initPage = () => page.value = 1
 
 const prevPage = () => {
   if (page.value > 1)page.value--
+}
+
+
+
+const gotoPage = async(value)=>{
+  if(value<=totalPages.value){
+    page.value = value.replace(/\D/g, '') || 1
+    await fetchData()
+  }else{
+    errorPagination.value= `Número maximo de paginación es ${totalPages.value}` 
+    setTimeout(()=>{
+      errorPagination.value=null
+    },3000)
+  }
 }
 
 onMounted(() => {
@@ -67,7 +74,7 @@ onMounted(() => {
     </div>
     
     <p v-else>{{err}}</p>
-    <Pagination v-if="imageList.length > 0 && !isLoading" @init-page="initPage" @prev-page="prevPage" @next-page="nextPage" @final-page="finalPage" :page="page" :totalPages="totalPages" v-model="searchPage"/>
+    <Pagination v-if="imageList.length > 0 && !isLoading" @init-page="initPage" @prev-page="prevPage" @next-page="nextPage" @final-page="finalPage" @go-to-page="gotoPage" :page="page" :totalPages="totalPages" v-model="searchPage" :error-pagination="errorPagination" />
     
   </main>
 </template>

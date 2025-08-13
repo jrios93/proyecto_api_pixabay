@@ -1,6 +1,7 @@
 <script setup>
 import Eyes from '@icons/Eyes.vue'
 import { useFormat } from '@/composables/useFormat.js'
+import fallbackImage from '@assets/imagesProblem.jpg'
 const props = defineProps({
     imageList:{
         type:Array,
@@ -9,6 +10,10 @@ const props = defineProps({
 })
 
 const {formatViews} = useFormat()
+
+const onImageError = (event)=>{
+  event.target.src = fallbackImage
+}
 
 </script>
 
@@ -20,7 +25,7 @@ const {formatViews} = useFormat()
           :key="image.id"
           :style="{ animationDelay: (index * 10) + 'ms' }"
         >
-          <img :src="image.webformatURL" :alt="['Foto '+ image.tags]" />
+          <img :src="image.webformatURL" :alt="['Foto '+ image.tags]" @error="onImageError" />
           
           <div class="custom-views">
             <Eyes/>
