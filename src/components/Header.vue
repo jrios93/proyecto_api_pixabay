@@ -14,7 +14,7 @@ const onInput = (e)=>{
 
 <template>
     <header class="header-container">
-        <div class="text-logo">galleria.</div>
+        <div class="text-logo"><a href="#" style="cursor: pointer; text-decoration-line: none ;">galleria.</a></div>
         <input class="input-class" placeholder="Busca tu imagen" :value="modelValue" @input="onInput"  />
         <div></div>
         
@@ -31,6 +31,10 @@ const onInput = (e)=>{
 .text-logo{
     font-size: 2rem;
     font-weight: 900;
+}
+
+.text-logo a:visited , .text-logo a::after{
+  color: #434343;
 }
 .text-right{
     text-transform: uppercase;
