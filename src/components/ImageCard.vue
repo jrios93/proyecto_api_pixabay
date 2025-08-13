@@ -1,7 +1,10 @@
 <script setup>
+import {ref} from 'vue'
 import Eyes from '@icons/Eyes.vue'
 import { useFormat } from '@/composables/useFormat.js'
 import fallbackImage from '@assets/imagesProblem.jpg'
+
+
 const props = defineProps({
     imageList:{
         type:Array,
@@ -9,10 +12,16 @@ const props = defineProps({
     }
 })
 
+const emit =  defineEmits(['open-modal'])
+
 const {formatViews} = useFormat()
 
 const onImageError = (event)=>{
   event.target.src = fallbackImage
+}
+
+const handleImageClick = (image)=>{
+  emit('open-modal',image)
 }
 
 </script>
@@ -24,8 +33,9 @@ const onImageError = (event)=>{
           v-for="(image, index) in imageList" 
           :key="image.id"
           :style="{ animationDelay: (index * 10) + 'ms' }"
+          @click="openModal"
         >
-          <img :src="image.webformatURL" :alt="['Foto '+ image.tags]" @error="onImageError" />
+          <img :src="image.webformatURL" :alt="['Foto '+ image.tags]" @error="onImageError" @click="handleImageClick(image)" />
           
           <div class="custom-views">
             <Eyes/>
@@ -40,6 +50,7 @@ const onImageError = (event)=>{
             <p class="tags">{{image.tags}}</p>
           </div>
         </div>
+      
       </div>
 </template>
 

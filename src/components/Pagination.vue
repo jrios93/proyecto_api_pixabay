@@ -61,7 +61,6 @@ watch(inputValue,(newValue)=>{
 <style scoped>
 
 .container-input-pagination{
-    width: 400px;
     color: #444;
     display: flex;
     align-items: center;
@@ -70,12 +69,14 @@ watch(inputValue,(newValue)=>{
     position: relative;
 }
 .err-pagination{
+     width: 210px;
     position: absolute;
     font-size: 12px;
     font-family: 300;
     bottom: 30px;
 }
 .err-pagination p{
+   
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color:rgb(249, 244, 244);
     background: #333333dd;
