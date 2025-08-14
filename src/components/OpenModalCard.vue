@@ -3,6 +3,8 @@ const props = defineProps({
     image: Object
 })
 const emit = defineEmits(['close'])
+const date = new Date().getFullYear()
+
 </script>
 
 <template>
@@ -10,12 +12,15 @@ const emit = defineEmits(['close'])
         <div class="modal-content">
             <div class="container-left">
                 <img :src="image?.largeImageURL" :alt="image?.tags" class="modal-image"/>
+                <div class="container-title">
+                    <h2>Magna officia eiusmod</h2>
+                </div>
             </div>
             <div class="container-right">
                 <button @click="emit('close')" class="close-btn">×</button>
                 <div class="content-wrapper">
-                    <h2>Magna officia eiusmod aliquip nulla occaecat ullamco mollit.</h2>
-                    <p>Labore cupidatat quis sunt ipsum fugiat. Non fugiat magna do anim ex et consectetur id enim. Voluptate officia tempor eiusmod quis proident enim officia. Lorem laborum cupidatat anim commodo reprehenderit. Nostrud qui consectetur esse dolor in commodo pariatur eiusmod est in fugiat.</p>
+                    <p>Labore cupidatat quis sunt ipsum fugiat. Non fugiat magna do anim ex et consectetur id enim. Voluptate officia tempor eiusmod quis proident enim officia. Lorem laborum cupidatat anim commodo reprehenderit. Nostrud qui consectetur esse dolor in commodo pariatur eiusmod est in fugiat.Exercitation dolore ut tempor culpa in ea deserunt excepteur reprehenderit eiusmod commodo labore id. Ut pariatur ut quis eiusmod incididunt labore laborum do incididunt officia veniam culpa irure minim. Consequat ullamco consequat adipisicing in ad ut. Adipisicing pariatur do est aliquip ex deserunt. Nisi eu minim in pariatur esse. Ea magna enim aliquip cillum. Exercitation labore minim est et eiusmod adipisicing ullamco ipsum tempor Lorem.</p>
+                    <span>{{date}}</span>
                 </div>
             </div>
         </div>
@@ -53,17 +58,36 @@ const emit = defineEmits(['close'])
 
 /* CENTRADO PERFECTO DE LA IMAGEN */
 .container-left {
-    flex: 1;
+    flex: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 400px;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    /* background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); */
     border-radius: 12px;
     padding: 1.5rem;
     position: relative;
 }
 
+.container-title{
+    width: 20%;
+}
+
+.container-title  h2 {
+    font-size: 3rem;
+    width: 30%;
+    color: #1f2937;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+
+    position: absolute;
+    margin: 0;
+    background-color: #fff;
+    padding: 1em;
+    top: 0;
+    right: 0;
+}
 .modal-image {
     max-width: 100%;
     max-height: 100%;
@@ -83,6 +107,13 @@ const emit = defineEmits(['close'])
     flex-direction: column;
     position: relative;
     min-width: 350px;
+}
+
+.container-right span{
+    font-size: 11em;
+    position: absolute;
+    color: #6766662a;
+    top:40px;
 }
 
 .close-btn {
@@ -121,13 +152,7 @@ const emit = defineEmits(['close'])
     justify-content: center;
 }
 
-.container-right h2 {
-    font-size: 2rem;
-    color: #1f2937;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 0;
-}
+
 
 .container-right p {
     font-size: 1.1rem;
